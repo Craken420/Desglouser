@@ -1,0 +1,15 @@
+{
+  "name": "desglouser",
+  "version": "1.0.0",
+  "description": "Desglozador de objetos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luis Angel Peña",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "iconv-lite": "^0.4.24"
+  }
+}
