@@ -1,22 +1,18 @@
 const fs = require('fs')
 const iconvlite = require('iconv-lite')
+const leerCopiarArchivo = require('./LeerCopiarArchivo')
 
-var leerCopiarArchivo = require('./LeerCopiarArchivo')
+const root = '../../../../Luis Angel\\Intelisis\\Intelisis5000\\'
+const archivoDLGMAVI5000 = root + 'Reportes MAVI\\MenuPrincipal_DLG_MAVI.esp'
 
-const archivoDLGMAVI5000 = 'C:\\Users\\lapena\\Documents\\Luis Angel\\Intelisis\\Intelisis5000\\Reportes MAVI' +
-                           '\\MenuPrincipal_DLG_MAVI.esp'
+const archivoMenuPrincipal5000 = root + 'Codigo Original\\MenuPrincipal.dlg'
 
-const archivoMenuPrincipal5000 = 'C:\\Users\\lapena\\Documents\\Luis Angel\\Intelisis\\Intelisis5000\\Codigo Original\\' +
-                                 'MenuPrincipal.dlg'
+const archivoDLGMAVI3000 = 'Reportes MAVI\\MenuPrincipal_DLG_MAVI.esp'
 
-const archivoDLGMAVI3000 = 'C:\\Users\\lapena\\Documents\\Luis Angel\\Intelisis\\Intelisis3000\\Reportes MAVI' +
-                           '\\MenuPrincipal_DLG_MAVI.esp'
-
-const archivoMenuPrincipal3000 = 'C:\\Users\\lapena\\Documents\\Luis Angel\\Intelisis\\Intelisis3000\\Codigo Original\\' +
-                                 'MenuPrincipal.dlg'
+const archivoMenuPrincipal3000 = root + 'Codigo Original\\MenuPrincipal.dlg'
                              
-const carpetaReportesMAVI5000 = 'C:\\Users\\lapena\\Documents\\Luis Angel\\Intelisis\\Intelisis5000\\Reportes MAVI\\'
-const carpetaReportesMAVI3000 = 'C:\\Users\\lapena\\Documents\\Luis Angel\\Intelisis\\Intelisis3100\\Reportes MAVI\\'
+const carpetaReportesMAVI5000 = root + 'Reportes MAVI\\'
+const carpetaReportesMAVI3000 = root + 'Reportes MAVI\\'
 
 const carpeta = 'Archivos\\'
 const carpetaPrueba = 'Archivos5000\\'
@@ -280,7 +276,7 @@ function extraerObjetoDelContenido (contenidoArchivo) {
     }
 
     let resultadoListaEnCaptura = /^ListaEnCaptura/gim.test(contenidoArchivo)
-    console.log('resultadoListaEnCaptura', resultadoListaEnCaptura)
+
     if ( resultadoListaEnCaptura == true) {
         let listaEnCapturaSDK =  contenidoArchivo.match(/^ListaEnCaptura(\d{3}|).*/gim).join('')
         //console.log(expresionSDK)
@@ -294,6 +290,26 @@ function extraerObjetoDelContenido (contenidoArchivo) {
         
         if ( existenTablas == true) {
             let tablas = listaEnCapturaSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            console.log(variables)
+        }
+    }
+
+    let resultadoListaAcciones = /^ListaAcciones/gim.test(contenidoArchivo)
+    
+    if ( resultadoListaAcciones == true) {
+        let listaAccionesSDK =  contenidoArchivo.match(/^ListaAcciones(\d{3}|).*/gim).join('')
+        //console.log(expresionSDK)
+        let existenVariables = /(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi.test(listaAccionesSDK)
+       
+        if ( existenVariables == true) {
+            let variables = listaAccionesSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tListaAcciones:' + variables)
+        }
+        let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(listaAccionesSDK)
+        
+        if ( existenTablas == true) {
+            let tablas = listaAccionesSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
             appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
             console.log(variables)
         }
