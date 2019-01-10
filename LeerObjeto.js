@@ -1,9 +1,9 @@
 const fs = require('fs')
 const iconvlite = require('iconv-lite')
-const archivoDLGMAVI = 'C:/Users/lapena/Documents/Luis Angel/Intelisis/Intelisis5000/Reportes MAVI' +
+const archivoDLGMAVI = 'C:/Users/arbolanos/Documents/MIGRACION/Intelisis5000/Reportes MAVI' +
                        '/MenuPrincipal_DLG_MAVI.esp'
 
-const archivoMenuPrincipal = 'C:/Users/lapena/Documents/Luis Angel/Intelisis/Intelisis5000/Codigo Original/' +
+const archivoMenuPrincipal = 'C:/Users/arbolanos/Documents/MIGRACION/Intelisis5000/Codigo Original/' +
                              'MenuPrincipal.dlg'
                              
 let recodificacion = 'Latin1'
@@ -80,10 +80,10 @@ function enviarObj (arreglo) {
                 let propiedadObj = Object.getOwnPropertyNames(jsonDLG[key])
         
                 for (key2 in propiedadObj) {
-                    jsonMenuP[key][ propiedadObj[key2] ] = jsonDLG[key][ propiedadObj[key2] ]
+                    jsonDLG[key][ propiedadObj[key2] ] = jsonMenuP[key][ propiedadObj[key2] ]
                 }
             
-            delete jsonDLG[key]
+            delete jsonMenuP[key]
           }
         
         let objMenuPCambio = Object.assign(jsonMenuP,  jsonDLG)
