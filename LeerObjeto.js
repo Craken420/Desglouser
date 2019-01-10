@@ -200,7 +200,7 @@ function comprobarCrear(claveAccion) {
 }
 
 function extraerAccionYObjetos (cadenaObj) {
-    let acciones = /^Acciones/gim.test(cadenaObj)
+    let acciones = /^Acciones/gim.test(cadenaObj.replace(/[{}"]/g, ''))
     if ( acciones == true) {
 
         let menu = cadenaObj.replace(/[{}"]/g, '').match(/(?<=Acciones:).*?(?=,)/gi).join('')
@@ -225,9 +225,17 @@ function extraerObjetoDelContenido (contenidoArchivo) {
     if ( ExpresionesAlMostrar == true) {
         let expresionSDK =  contenidoArchivo.match(/(^ExpresionesAlMostrar(\d{3}|))\=.*?(\).*)|(^ExpresionesAlMostrar)\=.*(?!\n)/gim).join('')
         //console.log(expresionSDK)
-        let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
-        // console.log(variables)
-        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlMostrar:' + variables)
+        let existenVariables = /(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi.test(expresionSDK)
+        if ( existenVariables == true) {
+            let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
+            // console.log(variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlMostrar:' + variables)
+        }
+        let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(expresionSDK)
+        if ( existenTablas == true) {
+            let tablas = expresionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+        }
         //console.log(resultadoExpresion)
     }
 
@@ -235,9 +243,19 @@ function extraerObjetoDelContenido (contenidoArchivo) {
     if ( ExpresionesAlCerrar == true) {
         let expresionSDK =  contenidoArchivo.match(/(^ExpresionesAlCerrar(\d{3}|))\=.*?(\).*)|(^ExpresionesAlCerrar)\=.*(?!\n)/gim).join('')
         //console.log(expresionSDK)
-        let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
-        // console.log(variables)
-        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlCerrar:' + variables)
+        let existenVariables = /(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi.test(expresionSDK)
+        
+        if ( existenVariables == true) {
+            let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
+            // console.log(variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlCerrar:' + variables)
+        }
+        let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(expresionSDK)
+        
+        if ( existenTablas == true) {
+            let tablas = expresionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+        }
         //console.log(resultadoExpresion)
     }
 
@@ -245,52 +263,97 @@ function extraerObjetoDelContenido (contenidoArchivo) {
     if ( ExpresionesAlActivar == true) {
         let expresionSDK =  contenidoArchivo.match(/(^ExpresionesAlActivar(\d{3}|))\=.*?(\).*)|(^ExpresionesAlActivar)\=.*(?!\n)/gim).join('')
         //console.log(expresionSDK)
-        let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
-        // console.log(variables)
-        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlActivar:' + variables)
+        let existenVariables = /(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi.test(expresionSDK)
+        
+        if ( existenVariables == true) {
+            let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
+            // console.log(variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlActivar:' + variables)
+        }
+        let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(expresionSDK)
+        
+        if ( existenTablas == true) {
+            let tablas = expresionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+        }
         //console.log(resultadoExpresion)
     }
 
     let resultadoListaEnCaptura = /^ListaEnCaptura/gim.test(contenidoArchivo)
+    console.log('resultadoListaEnCaptura', resultadoListaEnCaptura)
     if ( resultadoListaEnCaptura == true) {
         let listaEnCapturaSDK =  contenidoArchivo.match(/^ListaEnCaptura(\d{3}|).*/gim).join('')
         //console.log(expresionSDK)
-        let variables = listaEnCapturaSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
-        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tListaEnCaptura:' + variables)
-        // console.log(variables)
+        let existenVariables = /(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi.test(listaEnCapturaSDK)
+       
+        if ( existenVariables == true) {
+            let variables = listaEnCapturaSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tListaEnCaptura:' + variables)
+        }
+        let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(listaEnCapturaSDK)
+        
+        if ( existenTablas == true) {
+            let tablas = listaEnCapturaSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            console.log(variables)
+        }
     }
 
     let resultadoExpresion = /^Expresion/gim.test(contenidoArchivo)
     if ( resultadoExpresion == true) {
         let expresionSDK =  contenidoArchivo.match(/^Expresion(\d{3}|)\=.*/gim).join('')
         //console.log(expresionSDK)
-        let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
-        //console.log(variables)
-        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresion:' + variables)
-        //console.log(resultadoExpresion)
+        let existenVariables = /(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi.test(expresionSDK)
+        if ( existenVariables == true) {
+            let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
+            //console.log(variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresion:' + variables)
+        }
+        let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(expresionSDK)
+        if ( existenTablas == true) {
+            let tablas = expresionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            //console.log(resultadoExpresion)
+        }
     }
 
     let resultadoEjecucionCondicion = /^EjecucionCondicion/gim.test(contenidoArchivo)
     if ( resultadoEjecucionCondicion == true) {
-        let expresionSDK =  contenidoArchivo.match(/^EjecucionCondicion(\d{3}|)\=.*/gim).join('')
+        let ejecucionCondicionSDK =  contenidoArchivo.match(/^EjecucionCondicion(\d{3}|)\=.*/gim).join('')
         //console.log(expresionSDK)
-        let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
-        //console.log(variables)
-        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tEjecucionCondicion:' + variables)
-        let tablas = expresionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
-        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+        let existenVariables = /(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi.test(ejecucionCondicionSDK)
+        
+        if ( existenVariables == true) {
+            let variables = ejecucionCondicionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
+            //console.log(variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tEjecucionCondicion:' + variables)
+        }
+
+        let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(ejecucionCondicionSDK)
+        
+        if ( existenTablas == true) {
+            let tablas = ejecucionCondicionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+        }
         //console.log(resultadoExpresion)
     }
 
     let resultadoEjecucionMensaje = /^EjecucionMensaje(\d{3}|)/gim.test(contenidoArchivo)
     if ( resultadoEjecucionMensaje == true) {
-        let expresionSDK =  contenidoArchivo.match(/^EjecucionMensaje(\d{3}|)\=.*/gim).join('')
+        let ejecucionMensajeSDK =  contenidoArchivo.match(/^EjecucionMensaje(\d{3}|)\=.*/gim).join('')
         //console.log(expresionSDK)
-        let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
-        //console.log(variables)
-        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tEjecucionMensaje:' + variables)
-        let tablas = expresionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
-        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+        let existenVariables = /(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi.test(ejecucionMensajeSDK)
+        
+        if ( existenVariables == true) {
+            let variables = ejecucionMensajeSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
+            //console.log(variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tEjecucionMensaje:' + variables)
+        }
+        let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(ejecucionMensajeSDK)
+        if ( existenTablas == true) {
+            let tablas = ejecucionMensajeSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+        }
         //console.log(resultadoExpresion)
     }
 }
