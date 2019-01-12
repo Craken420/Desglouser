@@ -7,7 +7,7 @@ const archivoDLGMAVI5000 = root + 'Reportes MAVI\\MenuPrincipal_DLG_MAVI.esp'
 
 const archivoMenuPrincipal5000 = root + 'Codigo Original\\MenuPrincipal.dlg'
 
-const archivoDLGMAVI3000 = 'Reportes MAVI\\MenuPrincipal_DLG_MAVI.esp'
+const archivoDLGMAVI3000 = root + 'Reportes MAVI\\MenuPrincipal_DLG_MAVI.esp'
 
 const archivoMenuPrincipal3000 = root + 'Codigo Original\\MenuPrincipal.dlg'
                              
@@ -213,7 +213,6 @@ function extraerAccionYObjetos (cadenaObj) {
     }    else {
         console.log('No se encontraron acciones')
     }
-
 }
 
 function extraerObjetoDelContenido (contenidoArchivo) {
@@ -377,7 +376,7 @@ function extraerObjetoDelContenido (contenidoArchivo) {
 let objeto = enviarObj(acceso)
 
 if (objeto != undefined){
-    let cadenaObj = JSON.stringify(objeto)
+    let cadenaObj = objeto.join('\n')
 
     extraerAccionYObjetos (cadenaObj)
 } else {

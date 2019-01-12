@@ -1,0 +1,11 @@
+corregir el nombre de la accion
+
+join por salto y concatenarle los objetos de las variables
+
+test si visible =s
+
+se tiene que tener en las variables
+AyudaEnCaptura=Vista 
+para llamar a la vista
+
+.join(':\n\t\t\t\t\t{\n\t\t\t\t\t'))

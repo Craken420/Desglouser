@@ -7,7 +7,7 @@ const archivoDLGMAVI5000 = root + 'Reportes MAVI\\MenuPrincipal_DLG_MAVI.esp'
 
 const archivoMenuPrincipal5000 = root + 'Codigo Original\\MenuPrincipal.dlg'
 
-const archivoDLGMAVI3000 = 'Reportes MAVI\\MenuPrincipal_DLG_MAVI.esp'
+const archivoDLGMAVI3000 = root + 'Reportes MAVI\\MenuPrincipal_DLG_MAVI.esp'
 
 const archivoMenuPrincipal3000 = root + 'Codigo Original\\MenuPrincipal.dlg'
                              
@@ -145,6 +145,13 @@ function fileExists(archivo) {
     }
 }
 
+function eliminarDuplicado (arreglo) {
+    let set                 = new Set( arreglo.map( JSON.stringify ) )
+    let arrSinDuplicaciones = Array.from( set ).map( JSON.parse );
+    return arrSinDuplicaciones
+    //console.log( arrSinDuplicaciones );
+}
+
 function appendArchivo (archivo, texto) {
     fs.appendFileSync(archivo, '\n' + texto, { flag:'as' })
 }
@@ -225,12 +232,13 @@ function extraerObjetoDelContenido (contenidoArchivo) {
         if ( existenVariables == true) {
             let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
             // console.log(variables)
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlMostrar:' + variables)
+            
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlMostrar:' + eliminarDuplicado(variables.split(',')).join(','))
         }
         let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(expresionSDK)
         if ( existenTablas == true) {
             let tablas = expresionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + eliminarDuplicado(tablas.split(',')).join(','))
         }
         //console.log(resultadoExpresion)
     }
@@ -244,13 +252,13 @@ function extraerObjetoDelContenido (contenidoArchivo) {
         if ( existenVariables == true) {
             let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
             // console.log(variables)
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlCerrar:' + variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlCerrar:' + eliminarDuplicado(variables.split(',')).join(','))
         }
         let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(expresionSDK)
         
         if ( existenTablas == true) {
             let tablas = expresionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + eliminarDuplicado(tablas.split(',')).join(','))
         }
         //console.log(resultadoExpresion)
     }
@@ -264,13 +272,13 @@ function extraerObjetoDelContenido (contenidoArchivo) {
         if ( existenVariables == true) {
             let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
             // console.log(variables)
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlActivar:' + variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresionesAlActivar:' + eliminarDuplicado(variables.split(',')).join(','))
         }
         let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(expresionSDK)
         
         if ( existenTablas == true) {
             let tablas = expresionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + eliminarDuplicado(tablas.split(',')).join(','))
         }
         //console.log(resultadoExpresion)
     }
@@ -284,13 +292,13 @@ function extraerObjetoDelContenido (contenidoArchivo) {
        
         if ( existenVariables == true) {
             let variables = listaEnCapturaSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tListaEnCaptura:' + variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tListaEnCaptura:' + eliminarDuplicado(variables.split(',')).join(','))
         }
         let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(listaEnCapturaSDK)
         
         if ( existenTablas == true) {
             let tablas = listaEnCapturaSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + eliminarDuplicado(tablas.split(',')).join(','))
             console.log(variables)
         }
     }
@@ -304,15 +312,25 @@ function extraerObjetoDelContenido (contenidoArchivo) {
        
         if ( existenVariables == true) {
             let variables = listaAccionesSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tListaAcciones:' + variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tListaAcciones:' + eliminarDuplicado(variables.split(',')).join(','))
         }
         let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(listaAccionesSDK)
         
         if ( existenTablas == true) {
             let tablas = listaAccionesSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + eliminarDuplicado(tablas.split(',')).join(','))
             console.log(variables)
         }
+    }
+
+    let resultadoAcciones = /^\[Acciones/gim.test(contenidoArchivo)
+    
+    if ( resultadoAcciones == true) {
+        let accionesSDK =  contenidoArchivo.match(/(?<=^\[Acciones\.).*(?=\])/gim).join(',')
+        //console.log(expresionSDK)
+      
+        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tAcciones:' + eliminarDuplicado(accionesSDK.split(',')).join(','))
+        
     }
 
     let resultadoExpresion = /^Expresion/gim.test(contenidoArchivo)
@@ -323,12 +341,12 @@ function extraerObjetoDelContenido (contenidoArchivo) {
         if ( existenVariables == true) {
             let variables = expresionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
             //console.log(variables)
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresion:' + variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tExpresion:' + eliminarDuplicado(variables.split(',')).join(','))
         }
         let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(expresionSDK)
         if ( existenTablas == true) {
             let tablas = expresionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + eliminarDuplicado(tablas.split(',')).join(','))
             //console.log(resultadoExpresion)
         }
     }
@@ -342,14 +360,14 @@ function extraerObjetoDelContenido (contenidoArchivo) {
         if ( existenVariables == true) {
             let variables = ejecucionCondicionSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
             //console.log(variables)
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tEjecucionCondicion:' + variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tEjecucionCondicion:' + eliminarDuplicado(variables.split(',')).join(','))
         }
 
         let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(ejecucionCondicionSDK)
         
         if ( existenTablas == true) {
             let tablas = ejecucionCondicionSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + eliminarDuplicado(tablas.split(',')).join(','))
         }
         //console.log(resultadoExpresion)
     }
@@ -363,14 +381,30 @@ function extraerObjetoDelContenido (contenidoArchivo) {
         if ( existenVariables == true) {
             let variables = ejecucionMensajeSDK.match(/(?<=asigna\().*?(?=,)|(?<!\w)\w+\.(?=dm|rm)\w+|(?<!\w)(rm|dm)\w+/gi).join(',')
             //console.log(variables)
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tEjecucionMensaje:' + variables)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tEjecucionMensaje:' + eliminarDuplicado(variables.split(',')).join(','))
         }
         let existenTablas = /(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gim.test(ejecucionMensajeSDK)
         if ( existenTablas == true) {
             let tablas = ejecucionMensajeSDK.match(/(?<=(from|join)\s)\w+|(?<=(from|join)\s\w+\,\s)\w+/gi).join(',')
-            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + tablas)
+            appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tTablas:' + eliminarDuplicado(tablas.split(',')).join(','))
         }
         //console.log(resultadoExpresion)
+    }
+
+    let resultadoVista = /^Vista\=/gim.test(contenidoArchivo)
+    if ( resultadoVista == true) {
+        console.log('resultadoVista', resultadoVista)
+        let vistaSDK =  contenidoArchivo.match(/(?<=^Vista\=).*/gim).join(',')
+        console.log('vistaSDK', vistaSDK)
+        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tVista:' + eliminarDuplicado(vistaSDK.split(',')).join(','))
+    }
+
+    let resultadoForma = /^Forma\=/gim.test(contenidoArchivo)
+    if ( resultadoForma == true) {
+        console.log('resultadoForma', resultadoForma)
+        let formaSDK =  contenidoArchivo.match(/(?<=^Forma\=).*/gim).join(',')
+        console.log('FormaSDK', formaSDK)
+        appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\tForma:' + eliminarDuplicado(formaSDK.split(',')).join(','))
     }
 }
 

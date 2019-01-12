@@ -19,7 +19,6 @@ exports.copyFile = function (carpetaDestino, archivo) {
 
     try {
         let dataDemo1 = readDemo1(archivo)
-        dataDemo1 += '\n' +  readDemo1(archivo)
 
         writeDemo2(carpetaDestino, archivo, dataDemo1)
         //console.log(dataDemo1)
