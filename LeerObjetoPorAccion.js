@@ -65,41 +65,82 @@ function extraer (arreglo, texto) {
         let expresionMenu =  crearExpresion(arreglo, posicion)
         extraccionReducida = extraerMenu(expresionMenu.objMenu, texto)
     }
-
+    
     return extraccionReducida
 }
 
-function extraerVariable(objVariables, texto) {
+function extraerVariable(objVariables, texto, arreglo, posicion) {
     // appendArchivo(carpeta + '1000.-extraerVariable.txt', objVariables)
     // appendArchivo(carpeta + '1000.-extraerVariableTexto.txt', texto)
     let test = objVariables.test(texto)
-    let matching = ''
+    let cont = 0
+    let extraccionReducida = {}
     if (test == true){
-        matching = texto.match(objVariables).join('')
-       
+        let matching = texto.match(objVariables)
+        //console.log('matching', typeof(matching))
+        
+            for (key in matching){
+                // if (matching[key] != undefined) {
+               // console.log('key',key,'match-'+matching[key]+'\nmatchend-----------------------------------------')
+            //    console.log(matching[0])
+                let cadena = matching[key].replace(/^\n$/gim, '')
+                cadena = cadena.split('\r\n').join(', ').replace(/(?<=(^\[).*)\]/g, '').replace(/^\[/g, 'Variable:').replace(/=/g, ':').replace(/\r/g, '')
+                //console.log('cadena--------------\n'+ cadena + '\n****************')
+                let jsonCadena = crearJson(cadena)
+                //console.log(jsonCadena)
+                // for (key2 in jsonCadena)
+                // {
+                //     console.log('---------------\n'+jsonCadena[key2]+ '\n------------------')
+                // }
+                // console.log(arreglo[posicion])
+                let nombreVariable = arreglo[posicion]
+                extraccionReducida[nombreVariable] = jsonCadena
+               
+                //objeto[]
+                //antes
+                //return jsonCadena
+            // }
+        }
+        // for (key2 in extraccionReducida) {
+        //     console.log(key2,extraccionReducida[key2])
+        // }
+        return extraccionReducida
+        // return matching
     }
     // appendArchivo(carpeta + '1000.-matching.txt', matching)
-    return matching
 }
 
 function extraerArregloVariable (arreglo, texto) {
-    //appendArchivo(carpeta + '1000.-Arreglo.txt', arreglo)
-    //appendArchivo(carpeta + '1000.-texto.txt', texto)
+    // appendArchivo(carpeta + '1000.-Arreglo.txt', arreglo)
+    // appendArchivo(carpeta + '1000.-texto.txt', texto)
     texto = texto + '\n['
     texto = jsonRegEx.metodos.limpiarComentarios(texto)
-
-    let extraccionReducida = ''
-
-    for(let posicion = 0; posicion < arreglo.length; posicion++) {
-
-        let expresionMenu =  crearExpresion(arreglo, posicion)
-        appendArchivo(carpeta + '1000.-expresionMenu.objVariables.txt', expresionMenu.objVariables)
-        extraccionReducida += extraerVariable(expresionMenu.objVariables, texto)
-        // console.log('extraerVariableEnMetodo.txt', extraerVariable(expresionMenu.objVariables, texto))
-        
+    let extraccionVariable = {}
+    contador = 0
+    for (key in arreglo) {
+        let expresionMenu =  crearExpresion(arreglo, key)
+      
+        //Funcional
+        // extraccionVariable[arreglo[key]] = extraerVariable(expresionMenu.objVariables, texto)
+        // //console.log(contador++)
+        // extraccionReducida[contador] = extraccionVariable
+        //Nuevo
+        //console.log(contador)
+        let objeto = extraerVariable(expresionMenu.objVariables, texto, arreglo, key)
+        if(objeto != undefined){
+            extraccionVariable[contador] = objeto
+            contador++
+        }
     }
-    //console.log('extraccionReducida', extraccionReducida)
-    return extraccionReducida
+    // for (key2 in extraccionVariable) {
+    //     console.log(key2,extraccionVariable[key2])
+    // }
+    return extraccionVariable
+    //Aqui seguirle
+    // for (key2 in extraccionReducida) {
+    //     console.log(extraccionReducida[key2])
+    // }
+   
 }
 
 function extraerMenu(expresionMenu, texto) {
@@ -120,7 +161,8 @@ function procesarArreglo(archivo, recodificacion, arreglo) {
 
 function procesarVariables(archivo, recodificacion, arreglo) {
     //console.log('recodificacion', recodificacion, 'arreglo', arreglo)
-    return extraerArregloVariable(arreglo, recodificar(archivo, recodificacion))
+    
+   return extraerArregloVariable(arreglo, recodificar(archivo, recodificacion))
 }
   
 function recodificar(archivo, recodificacion) {
@@ -131,7 +173,7 @@ function fileExists(archivo) {
     try {
         return fs.statSync(archivo).isFile();
     } catch (error) {
-        console.log(archivo,'no existe')
+        // si tieene que ir console.log(archivo,'no existe')
         return false;
     }
 }
@@ -155,6 +197,7 @@ function prepararJson(extraccion) {
 }
 
 function crearJson(texto) {
+    // console.log('texto crear json', texto)
     var properties = texto.split(', ')
     var obj = {}
     properties.forEach(function(property) {
@@ -165,50 +208,123 @@ function crearJson(texto) {
     return obj
 }
 
-function extraerObjetosVariablesMachin (arreglo) {
-    
-    //console.log('archivoVariablesOriginal5000', archivoVariablesOriginal5000)
+function extraerObjetosVariable (arreglo) {
     let extraccionVariablesOriginal = procesarVariables(archivoVariablesOriginal5000, 'ascii', arreglo)
-    //let extraccionVariables = procesarVariables(archivoVariables5000, 'ascii', arreglo)
-   // console.log('extraccionVariablesOriginal', extraccionVariablesOriginal)
-    if (extraccionVariablesOriginal != undefined) {
-        
-        appendArchivo(carpeta + '100.-extraccionVariablesOriginal.txt', extraccionVariablesOriginal)
-    // let extraccionDLGMAVI= procesarArreglo(archivoVariables5000, recodificacion, arreglo)
-    
-    // let objeto = buscarEnAchivos (extraccionMenuP, extraccionDLGMAVI)
-    } else {
-        console.log('Variables Originales Son Indefinidas')
-    }
-    let extraccionVariables= procesarVariables(archivoVariables5000, recodificacion, arreglo)
-    if (extraccionVariables != undefined) {
-        
-        appendArchivo(carpeta + '100.-extraccionVariables.txt', extraccionVariables)
-       
-    
-    } else {
-        console.log('Variables Son Indefinidas')
-    }
-    let objeto = buscarEnAchivos(extraccionVariablesOriginal, extraccionVariables)
-    if (objeto != undefined){
-        let cadenaObj = JSON.stringify(objeto)
-        cadenaObj = cadenaObj.replace(/[{}"]/g, '').split(',').join('\n')
-        appendArchivo(carpeta + '100000.-objetoVariablesConvinado.txt', cadenaObj)
-    }
-}
+    let extraccionVariables = procesarVariables(archivoVariables5000, recodificacion, arreglo)
+    let arregloObjetos = []
+    let cadenaArr = ''
+    for (key in extraccionVariablesOriginal) {
+        let propiedadSimilar = ''
+        // console.log(extraccionVariablesOriginal[key])
+        //for (key2 in extraccionVariablesOriginal[key]){
+            // console.log(extraccionVariablesOriginal[key][key2])
+        let propiedadObjOriginal = Object.getOwnPropertyNames(extraccionVariablesOriginal[key])
+        let propiedadObjVariables = {}
+        for (key2 in extraccionVariables) {
+            propiedadObjVariables = Object.getOwnPropertyNames(extraccionVariables[key2])
+        }
+        for (key3 in propiedadObjOriginal) {
+            for (key4 in propiedadObjVariables) {
+                // console.log(propiedadObjVariables[key3])
+                if (propiedadObjOriginal[key3] == propiedadObjVariables[key4]) {
+                    //console.log('existen variables similares', propiedadObjOriginal[key3])
+                    propiedadSimilar = propiedadObjOriginal[key3]
+                   
+                } else {
+                   // console.log('distintas', propiedadObjOriginal[key3])
+                }
+            }
+        }
+        //console.log(extraccionVariablesOriginal[key][propiedadSimilar])
+        let prop = {}
+        if(extraccionVariablesOriginal[key][propiedadSimilar] != null |extraccionVariablesOriginal[key][propiedadSimilar]!=undefined) {
+             prop = Object.getOwnPropertyNames(extraccionVariablesOriginal[key][propiedadSimilar])
+        }
+        // for (key7 in prop) {
+        //     console.log(prop[key7])
+        // }
+        let  prop2 = {}
+        for (key7 in extraccionVariables) {
+            if(extraccionVariables[key7][propiedadSimilar] != null |extraccionVariables[key][propiedadSimilar]!=undefined) {
+                prop2 = Object.getOwnPropertyNames(extraccionVariablesOriginal[key][propiedadSimilar])
+            }
+        }
 
-function extraerObjetosVariable (variable) {
-    let contenidoVariables =  fs.readFileSync(archivoVariables, 'ascii')
-    // console.log(contenidoVariables)
-    // console.log('variable',variable)
-    contenidoVariables = contenidoVariables + '\n['
-    appendArchivo(carpeta + '5.-ContenidoVariables.txt', contenidoVariables)
-    // let expresionVariable = new RegExp(`\\[.*?${variable}[^*]*?(?=\\[)`, `gim`)
-    // // appendArchivo(carpeta + '5.-ContenidoVariables.txt', 'variable:\t' + variable)
-    // let bloqueVariable = contenidoVariables.match(expresionVariable)
-    // for (key in bloqueVariable) {
-    //     appendArchivo(carpeta + '5.-ContenidoVariables.txt', variable + ':\n' + bloqueVariable[key])
-    // }
+        for (key8 in prop) {
+            //console.log('prop[key8]', prop[key8])
+            for (key9 in prop2) {
+                //console.log('prop[key9]', prop2[key9])
+                if (prop[key8] == prop2[key9]) {
+                    //console.log('propiedad igual')
+                    extraccionVariablesOriginal[key][propiedadSimilar][prop[key8]] = extraccionVariables[key7][propiedadSimilar][prop2[key9]]
+                    //delete extraccionVariables[key7][propiedadSimilar][prop2[key9]]
+                } else {
+                    //console.log('propiedad distinta')
+                }
+            }
+        }
+        if (extraccionVariablesOriginal[key][propiedadSimilar] != undefined) {
+        //console.log('extraccionVariablesOriginal[key][propiedadSimilar]',extraccionVariablesOriginal[key][propiedadSimilar])
+        }
+        
+        for (key10 in extraccionVariables) {
+            if (extraccionVariables[key10][propiedadSimilar] != undefined) {
+                //console.log('extraccionVariables[key10][propiedadSimilar]',extraccionVariables[key10][propiedadSimilar])
+                delete extraccionVariables[key10][propiedadSimilar]
+                //console.log('extraccionVariables[key10][propiedadSimilar]',extraccionVariables[key10][propiedadSimilar])
+            }
+            for (key11 in extraccionVariables[key10]) {
+                cadenaArr += JSON.stringify(extraccionVariables[key10][key11])
+            }
+            // console.log('extraccionVariables[key10]',extraccionVariables[key10])
+            //arrSinduplex = eliminarDuplicado()
+        }
+        // let objMenuPCambio = Object.assign(extraccionVariablesOriginal,  extraccionVariables)
+        
+        // for (key10 in extraccionVariables) {
+        //     console.log(objMenuPCambio[key10])
+        // //   appendArchivo(carpeta + 'objMenuPCambio.txt', objMenuPCambio[key10])
+        // }
+    }
+   
+    arregloObjetos = cadenaArr.split('}')
+    
+    let arregloSinDuplex = eliminarDuplicado(arregloObjetos)
+    //console.log('arrSinduplex', arregloSinDuplex)
+    let cadenaArregloSinDuplex = ''
+    for (key12 in arregloSinDuplex) {
+        arregloSinDuplex[key12] = arregloSinDuplex[key12] + '}'
+        cadenaArregloSinDuplex += arregloSinDuplex[key12]
+        
+    }
+    cadenaArregloSinDuplex = cadenaArregloSinDuplex.replace(/[{"]/g, '').replace(/\}/g, '} ')
+    cadenaArregloSinDuplex = cadenaArregloSinDuplex.replace(/\}\s\}/g, '').replace(/,/g, ', ')
+    let newArray = cadenaArregloSinDuplex.split('}')
+    //console.log(cadenaArregloSinDuplex)
+   
+    //console.log('newArr+ay[key13]',newArray)
+    let jsonArreglo = {}
+    let jsonArreglo2 = {}
+    for (key13 in newArray) {
+      
+        //console.log('newArray[key13]',newArray[key13])
+        jsonArreglo = crearJson(newArray[key13])
+         //console.log(jsonArreglo)
+        //jsonArregloSinDuplex[] += crearJson(newArray[key13])
+        
+        
+    }
+    appendArchivo(carpeta + 'cadenamachin.txt', cadenaArregloSinDuplex)
+    for (key12 in extraccionVariablesOriginal) {
+        for (key13 in extraccionVariablesOriginal[key12]) {
+            jsonArreglo2 += extraccionVariablesOriginal[key12][key13]
+        }
+          //appendArchivo(carpeta + 'objMenuPCambio.txt', objMenuPCambio[key10])
+    }
+    console.log(jsonArreglo2)
+    // let objMenuPCambio = Object.assign(jsonArreglo, jsonArreglo2)
+    // console.log(objMenuPCambio)
+
 }
 
 function extraerExpresionAlMostrar(acciones) {
@@ -231,7 +347,8 @@ function extraerExpresionAlMostrar(acciones) {
                     appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\t\t' + variablesSinDuplicado[key] + ':')
                     // extraerObjetosVariable(variablesSinDuplicado[key])
                 }
-                extraerObjetosVariablesMachin(variablesSinDuplicado)
+                extraerObjetosVariable(variablesSinDuplicado)
+               // extraerObjetosVariablesMachin(variablesSinDuplicado)
                 // appendArchivo(carpeta + '4.-ObjetosEncontradosJSON.txt', '\t\t\t{\n\t\t\t\tExpresionesAlMostrar: {\n\t\t\t\t\t' + eliminarDuplicado(variables.split(',')).join(':'))
             }
 
@@ -463,10 +580,10 @@ function extraerEjecucionMensaje (acciones) {
 }
 
 function extraerVista (acciones) {
-    let resultadoVista = /^Vista\=/gim.test(acciones)
+    let resultadoVista = /(?<=^Vista=)(?!\(Variables\)).*/gim.test(acciones)
     if ( resultadoVista == true) {
         //console.log('resultadoVista', resultadoVista)
-        let vistaSDK =  acciones.match(/(?<=^Vista\=).*/gim).join(',')
+        let vistaSDK =  acciones.match(/(?<=^Vista=)(?!\(Variables\)).*/gim).join(',')
         //console.log('vistaSDK', vistaSDK)
         let vistasSinDuplicado = eliminarDuplicado(vistaSDK.split(','))
         appendArchivo(carpeta + '3.-ObjetosEncontrados.txt', '\t\t\tVista:')
@@ -546,7 +663,7 @@ function crearNombreObjeto (tipoAccion, claveAccion) {
 
     switch (tipoAccion) {
         case 'Formas': {
-            console.log('claveAccion', claveAccion, claveAccion + '.frm' )
+            //console.log('claveAccion', claveAccion, claveAccion + '.frm' )
             return claveAccion + '.frm'
         }
         case 'Dialogos': {
@@ -567,11 +684,11 @@ function comprobarCrear(tipoAccion, claveAccion) {
     //console.log('banderaArchivoExiste', banderaArchivoExiste)
     if (banderaArchivoExiste == false) {
         leerCopiarArchivo.copyFile(carpetaPrueba, carpetaReportesMAVI3000 + nombreObjeto)
-        console.log(nombreObjeto + ' Se creo en la version 5000')
+        // si tiene que ir console.log(nombreObjeto + ' Se creo en la version 5000')
         appendArchivo(carpeta + '4.-ObjetosDe3000A5000.txt', nombreObjeto)
         return carpetaPrueba + nombreObjeto
     } else {
-        console.log(nombreObjeto + ' Ya existe en la version 5000')
+        //si tiene que ir console.log(nombreObjeto + ' Ya existe en la version 5000')
         return carpetaPrueba + nombreObjeto
     }
 }
@@ -580,10 +697,10 @@ function extraerAccionYObjetos (cadenaObj) {
 
     cadenaObj = cadenaObj.replace(/[{}"]/g, '').split(',').join('\n')
 
-    appendArchivo(carpeta + '3000.-cadenaObj.txt', cadenaObj)
+    // appendArchivo(carpeta + '3000.-cadenaObj.txt', cadenaObj)
 
     let existenAccones = /^Acciones/gim.test(cadenaObj.replace(/[{}"]/g, ''))
-    console.log('existenAccones', existenAccones)
+    // si tiene que ir console.log('existenAccones', existenAccones)
     if ( existenAccones == true) {
 
         let menu = cadenaObj.match(/(?<=Acciones:).*/gi).join('')
@@ -603,71 +720,78 @@ function extraerAccionYObjetos (cadenaObj) {
 
         let archivoCreado = comprobarCrear(tipoAccion, claveAccion)
 
-        console.log('Ruta del archivo creado o existente:', archivoCreado)
+        //Si tiene que ir console.log('Ruta del archivo creado o existente:', archivoCreado)
 
         extraerAccionesDelContenido(archivoCreado)
     }  else {
-        console.log('No se encontraron acciones')
+        //Si tiene que ir console.log('No se encontraron acciones')
     }
 }
 
 function buscarEnAchivos (extraccionMenuP, extraccionDLGMAVI) {
     let opcion = 0
-    if (extraccionMenuP != undefined && extraccionDLGMAVI != undefined|extraccionMenuP != null && extraccionDLGMAVI != null) {
-        
-        let jsonMenuP = prepararJson(extraccionMenuP)
-        let jsonDLG = prepararJson(extraccionDLGMAVI)
+    let cont = 1
+    if (cont == 1) {
+        if (extraccionMenuP != undefined && extraccionDLGMAVI != undefined|extraccionMenuP != null && extraccionDLGMAVI != null) {
+            cont = 2
+            let jsonMenuP = prepararJson(extraccionMenuP)
+            let jsonDLG = prepararJson(extraccionDLGMAVI)
 
-            for (key in jsonMenuP) {
-                if (jsonMenuP[key] != undefined |jsonMenuP[key] != null) {
-               { 
-                   let propiedadObj = Object.getOwnPropertyNames(jsonDLG[key])
-        
-                    for (key2 in propiedadObj) {
-                        jsonDLG[key][ propiedadObj[key2] ] = jsonMenuP[key][ propiedadObj[key2] ]
-                    }
+                for (key in jsonMenuP) {
+                    if (jsonMenuP[key] != undefined |jsonMenuP[key] != null) {
+                    {
+                        let propiedadObj = Object.getOwnPropertyNames(jsonDLG[key])
                 
-                    delete jsonMenuP[key]
+                        for (key2 in propiedadObj) {
+                            jsonDLG[key][ propiedadObj[key2] ] = jsonMenuP[key][ propiedadObj[key2] ]
+                        }
+
+                        delete jsonMenuP[key]
+                    }
+                }
+
+                let objMenuPCambio = Object.assign(jsonMenuP,  jsonDLG)
+                opcion = 1
+                return {
+                    objMenuPCambio:objMenuPCambio,
+                    opcion: opcion
                 }
             }
-            
-            let objMenuPCambio = Object.assign(jsonMenuP,  jsonDLG)
-            opcion = 1
+        } else if (extraccionMenuP != undefined) {
+            cont = 3
+            let jsonMenuP = prepararJson(extraccionMenuP)
+            opcion = 2
             return {
-                objMenuPCambio:objMenuPCambio,
+                jsonMenuP: jsonMenuP,
                 opcion: opcion
             }
-        }
-    } else if (extraccionMenuP != undefined) {
-        let jsonMenuP = prepararJson(extraccionMenuP)
-        opcion = 2
-        return {
-            jsonMenuP: jsonMenuP,
-            opcion: opcion
-        }
 
-    } else if (extraccionDLGMAVI != undefined) {
-        let jsonDLG = prepararJson(extraccionDLGMAVI)
-        opcion = 3
-        return {
-            jsonDLG: jsonDLG,
-            opcion: opcion
-        }
+        } else if (extraccionDLGMAVI != undefined) {
+            cont = 4
+            let jsonDLG = prepararJson(extraccionDLGMAVI)
+            opcion = 3
+            return {
+                jsonDLG: jsonDLG,
+                opcion: opcion
+            }
 
+        } else {
+            //Si tiene que ir console.log('No se encuentra en ningun archivo de la version 5000')
+        // let contenidoArchivo = fs.readFileSync(archivo, 'ascii')
+        }
     } else {
-        console.log('No se encuentra en ningun archivo de la version 5000')
-       // let contenidoArchivo = fs.readFileSync(archivo, 'ascii')
+        //si tiene que ir console.log('extraccionDLGMAVI con mayor a 1', extraccionMenuP, extraccionDLGMAVI)
     }
 }
 
 function enviarObj (arreglo) {
 
     let extraccionMenuP = procesarArreglo(archivoMenuPrincipal5000, recodificacion, arreglo)
-    let extraccionDLGMAVI= procesarArreglo(archivoDLGMAVI5000, recodificacion, arreglo)
-    
+    let extraccionDLGMAVI = procesarArreglo(archivoDLGMAVI5000, recodificacion, arreglo)
+
     let objeto = buscarEnAchivos(extraccionMenuP, extraccionDLGMAVI)
 
-    switch(objeto.opcion){
+    switch (objeto.opcion) {
         case 1: {
             let agregacionDLG = 'Se encuentra en ambos archivos: \n\n' +
             'extraccion del archivo MenuPrincipal: \n\n' + extraccionMenuP + 
@@ -676,16 +800,16 @@ function enviarObj (arreglo) {
         
             appendArchivo(carpeta + '1.-MenuPYDLG.txt', agregacionDLG)
         
-            console.log('Existe en ambos y se combinaron las extracciones')
+            // si tiene que ir console.log('Existe en ambos y se combinaron las extracciones')
             return objeto.objMenuPCambio
         }
         case 2: {
             let agregacionMenuP = 'Se encuentra solo en MenuP: \n\n' +
             'extraccion del archivo MenuP: \n\n' +  extraccionMenuP
-    
+
             appendArchivo(carpeta + '2.-MenuP.txt', agregacionMenuP)
-    
-            console.log('Se encuentra solo en MenuP')
+
+            //si tiene que ir console.log('Se encuentra solo en MenuP')
             return objeto.jsonMenuP
         }
         case 3:{
@@ -694,7 +818,7 @@ function enviarObj (arreglo) {
     
             appendArchivo(carpeta + '2.-DLG.txt', agregacionDLG)
     
-            console.log('Se encuentra solo en DLGMAVI')
+            //si tiene que ir console.log('Se encuentra solo en DLGMAVI')
             return objeto.jsonDLG
         }
         default: {
@@ -705,11 +829,12 @@ function enviarObj (arreglo) {
 
 let objeto = enviarObj(acceso)
 //console.log('objeto', objeto, typeof(objeto))
-if (objeto != undefined){
+if (objeto != undefined) {
+
     let cadenaObj = JSON.stringify(objeto)
 
     extraerAccionYObjetos(cadenaObj)
 } else {
-    console.log('No existe en la version 5000')
+    //si tiene que ir console.log('No existe en la version 5000')
 }
 
