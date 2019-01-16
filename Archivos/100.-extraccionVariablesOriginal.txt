@@ -1,0 +1,60 @@
+
+[Info.Fecha]
+Grupo=Info
+Clave=Fecha
+Tipo=Fecha/Hora
+Nombre=Fecha
+Tamano=20
+AyudaEnCaptura=Calendario sin Hora
+OpcionesPredefinidas=Ninguna
+
+
+[Info.Fecha]
+Grupo=Info
+Clave=Fecha
+Tipo=Fecha/Hora
+Nombre=Fecha
+Tamano=20
+AyudaEnCaptura=Calendario sin Hora
+OpcionesPredefinidas=Ninguna
+
+
+[Info.Fecha]
+Grupo=Info
+Clave=Fecha
+Tipo=Fecha/Hora
+Nombre=Fecha
+Tamano=20
+AyudaEnCaptura=Calendario sin Hora
+OpcionesPredefinidas=Ninguna
+
+
+[Info.Fecha]
+Grupo=Info
+Clave=Fecha
+Tipo=Fecha/Hora
+Nombre=Fecha
+Tamano=20
+AyudaEnCaptura=Calendario sin Hora
+OpcionesPredefinidas=Ninguna
+
+
+[Info.Fecha]
+Grupo=Info
+Clave=Fecha
+Tipo=Fecha/Hora
+Nombre=Fecha
+Tamano=20
+AyudaEnCaptura=Calendario sin Hora
+OpcionesPredefinidas=Ninguna
+
+
+[Info.Fecha]
+Grupo=Info
+Clave=Fecha
+Tipo=Fecha/Hora
+Nombre=Fecha
+Tamano=20
+AyudaEnCaptura=Calendario sin Hora
+OpcionesPredefinidas=Ninguna
+

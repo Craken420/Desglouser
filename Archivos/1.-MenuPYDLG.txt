@@ -1,0 +1,352 @@
+
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+Nombre:Herramienta.DM0269OrdenadorRutaReparto,
+Boton:0,
+EnMenu:S,
+Activo:S,
+Visible:S,
+Acciones:Herramienta.DM0269OrdenadorRutaReparto,
+NombreDesplegar:Ordenadorrutadereparto,
+TipoAccion:Formas,
+ClaveAccion:DM0269OrdenadorRutaDeRepartoFrm,
+Menu:Herramientas
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+[object Object][object Object]
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+Nombre:Herramienta.DM0269OrdenadorRutaReparto,
+Boton:0,
+EnMenu:S,
+Activo:S,
+Visible:S,
+Acciones:Herramienta.DM0269OrdenadorRutaReparto,
+NombreDesplegar:Ordenadorrutadereparto,
+TipoAccion:Formas,
+ClaveAccion:DM0269OrdenadorRutaDeRepartoFrm,
+Menu:Herramientas
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+Nombre:Herramienta.DM0269OrdenadorRutaReparto,
+Boton:0,
+EnMenu:S,
+Activo:S,
+Visible:S,
+Acciones:Herramienta.DM0269OrdenadorRutaReparto,
+NombreDesplegar:Ordenadorrutadereparto,
+TipoAccion:Formas,
+ClaveAccion:DM0269OrdenadorRutaDeRepartoFrm,
+Menu:Herramientas
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+Nombre:Herramienta.DM0269OrdenadorRutaReparto,
+Boton:0,
+EnMenu:S,
+Activo:S,
+Visible:S,
+Acciones:Herramienta.DM0269OrdenadorRutaReparto,
+NombreDesplegar:Ordenadorrutadereparto,
+TipoAccion:Formas,
+ClaveAccion:DM0269OrdenadorRutaDeRepartoFrm,
+Menu:Herramientas
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+Nombre:Herramienta.DM0269OrdenadorRutaReparto,
+Boton:0,
+EnMenu:S,
+Activo:S,
+Visible:S,
+Acciones:Herramienta.DM0269OrdenadorRutaReparto,
+NombreDesplegar:Ordenadorrutadereparto,
+TipoAccion:Formas,
+ClaveAccion:DM0269OrdenadorRutaDeRepartoFrm,
+Menu:Herramientas
+Se encuentra en ambos archivos: 
+
+extraccion del archivo MenuPrincipal: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=1900
+EnMenu=nel
+Activo=nel
+Visible=nel
+
+extraccion del archivo DLGMAVI: 
+
+[MenuPrincipal.dlg/Acciones.Herramienta.DM0269OrdenadorRutaReparto]
+Nombre=Herramienta.DM0269OrdenadorRutaReparto
+Boton=0
+EnMenu=S
+Activo=S
+Visible=S
+NombreDesplegar=Ordenador ruta de reparto
+TipoAccion=Formas
+ClaveAccion=DM0269OrdenadorRutaDeRepartoFrm
+Menu=&Herramientas
+
+MenuPrincipalConCambio: 
+
+Nombre:Herramienta.DM0269OrdenadorRutaReparto,
+Boton:0,
+EnMenu:S,
+Activo:S,
+Visible:S,
+Acciones:Herramienta.DM0269OrdenadorRutaReparto,
+NombreDesplegar:Ordenadorrutadereparto,
+TipoAccion:Formas,
+ClaveAccion:DM0269OrdenadorRutaDeRepartoFrm,
+Menu:Herramientas
