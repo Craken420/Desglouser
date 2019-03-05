@@ -11,21 +11,40 @@ const pathFile = './Testing\\DM0269OrdenadorRutaDeRepartoFrm.frm'
 
 let obj = {}
 
-obj[rgx.Borrar.clsRuta(pathFile)] = desglozar(
-    decode(
-        rgx.Borrar.clsComentariosIntls(
-            unirCamposConsecutivosComponente(
-                extraerContenidoRecodificado(pathFile)
-            )
-        ).replace(/&/g, '') + '\n['
-    )
+let objFile =  decode(
+    rgx.Borrar.clsComentariosSQL(rgx.Borrar.clsComentariosIntls(
+        unirCamposConsecutivosComponente(
+            extraerContenidoRecodificado(pathFile)
+        )
+    ).replace(/&/g, '')) + '\n['
 )
 
-// console.log(obj)
+let sendObj = JSON.parse( JSON.stringify( objFile ) )
 
-for (key in obj) {
-    // console.log(obj[key])
-    for (key2 in obj[key]) {
-        //console.log(obj[key][key2])
-    }
-}
+obj[rgx.Borrar.clsRuta(pathFile)] = desglozar(sendObj)
+
+console.log(obj)
+
+/*** Recorrer el detalle ***/
+
+// for (path in obj) {
+//     //console.log(obj[key])
+//     for (cmp in obj[path]['Detalle']) {
+//         //console.log(obj[path]['Detalle'][cmp])
+//         console.log('[' + cmp + ']')
+//         for (field in obj[path]['Detalle'][cmp]) {
+//             // console.log(obj[path]['Detalle'][cmp][field])
+//             if (obj[path]['Detalle'][cmp][field]['objIntls']) {
+//                 console.log(field + '= ',
+//                 obj[path]['Detalle'][cmp][field]['objIntls'])
+//                 // console.log('-----------------------------------------------')
+//             }
+//             if (obj[path]['Detalle'][cmp][field]['objSQL']) {
+//                 // console.log('-----------------------------------------------')
+//                 console.log(field + '= ',
+//                 obj[path]['Detalle'][cmp][field]['objSQL'])
+//                 // console.log('-----------------------------------------------')
+//             }
+//         }
+//     }
+// }
