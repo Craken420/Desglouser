@@ -1,29 +1,29 @@
-const gt = require('./Utilerias/Abductor/cmpInObj')
-
-const { carpetas } = require('./Utilerias/Archivos/jsonCarpetas')
-const rgx = require('./Utilerias/RegEx/jsonRgx')
 const { decode } = require('./Utilerias/OperadorObjetos/decode')
 const { extraerContenidoRecodificado } = require('./Utilerias/Codificacion/contenidoRecodificado')
-const { unirCamposConsecutivosComponente } = require('./Utilerias/OperarCadenas/unirConsecutivoPorComponente')
+const { continua } = require('./Utilerias/OperadorObjetos/continua')
 const { desglozar } = require('./Utilerias/OperadorObjetos/desglozar')
+
+const rgx = require('./Utilerias/RegEx/jsonRgx')
 
 const pathFile = './Testing\\DM0269OrdenadorRutaDeRepartoFrm.frm'
 
 let obj = {}
 
-let objFile =  decode(
-    rgx.Borrar.clsComentariosSQL(rgx.Borrar.clsComentariosIntls(
-        unirCamposConsecutivosComponente(
-            extraerContenidoRecodificado(pathFile)
-        )
-    ).replace(/&/g, '')) + '\n['
-)
+let objFile = decode(
+        rgx.Borrar.clsComentariosSQL(
+            rgx.Borrar.clsComentariosIntls(
+                extraerContenidoRecodificado(pathFile)
+            )
+        ).replace(/&/g, '')+ '\n['
+    )
 
 let sendObj = JSON.parse( JSON.stringify( objFile ) )
 
-obj[rgx.Borrar.clsRuta(pathFile)] = desglozar(sendObj)
+obj[rgx.Borrar.clsRuta(pathFile)] = desglozar(continua(sendObj))
 
 console.log(obj)
+
+//Recorrer el arreglo de formas y por cada una buscar si existe y volver a ejecutar
 
 /*** Recorrer el detalle ***/
 
