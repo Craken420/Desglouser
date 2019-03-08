@@ -1,50 +1,20 @@
-const { decode } = require('./Utilerias/OperadorObjetos/decode')
-const { extraerContenidoRecodificado } = require('./Utilerias/Codificacion/contenidoRecodificado')
-const { continua } = require('./Utilerias/OperadorObjetos/continua')
-const { desglozar } = require('./Utilerias/OperadorObjetos/desglozar')
+const { generarObj } = require('./Utilerias/OperadorObjetos/desglozar')
+const { leerCarpetaFiltrada } = require('./Utilerias/OperadoresArchivos/readDirOnlyFile')
 
-const rgx = require('./Utilerias/RegEx/jsonRgx')
+const carpeta = 'Testing\\'
+const file = 'C:\\Users\\lapena\\Documents\\Luis Angel\\Sección Mavi\\Intelisis\\Intelisis5000\\Reportes MAVI\\FormaValor.vis'
+const carpetaReportes = 'C:\\Users\\lapena\\Documents\\Luis Angel\\Sección Mavi\\Intelisis\\Intelisis5000\\Reportes MAVI'
 
-const pathFile = './Testing\\DM0269OrdenadorRutaDeRepartoFrm.frm'
+// generarObj(file)
 
-let obj = {}
-
-let objFile = decode(
-        rgx.Borrar.clsComentariosSQL(
-            rgx.Borrar.clsComentariosIntls(
-                extraerContenidoRecodificado(pathFile)
-            )
-        ).replace(/&/g, '')+ '\n['
-    )
-
-let sendObj = JSON.parse( JSON.stringify( objFile ) )
-
-obj[rgx.Borrar.clsRuta(pathFile)] = desglozar(continua(sendObj))
-
-// console.log(obj)
-
-//Recorrer el arreglo de formas y por cada una buscar si existe y volver a ejecutar
-
-/*** Recorrer el detalle ***/
-
-for (path in obj) {
-    // console.log(obj[path])
-    for (cmp in obj[path]['Detalle']) {
-        // console.log(obj[path]['Detalle'][cmp])
-        // console.log('[' + cmp + ']')
-        for (field in obj[path]['Detalle'][cmp]) {
-            // console.log(obj[path]['Detalle'][cmp][field])
-            if (obj[path]['Detalle'][cmp][field]['objIntls']) {
-                // console.log(field + '= ',
-                obj[path]['Detalle'][cmp][field]['objIntls']
-                // console.log('-----------------------------------------------')
-            }
-            if (obj[path]['Detalle'][cmp][field]['objSQL']) {
-                // console.log('-----------------------------------------------')
-                // console.log(field + '= ',
-                obj[path]['Detalle'][cmp][field]['objSQL']
-                // console.log('-----------------------------------------------')
-            }
-        }
-    }
-}
+leerCarpetaFiltrada(carpetaReportes, ['.frm', '.tbl', '.vis', '.dlg', '.rep'])
+.then(archivos => {
+    
+    archivos.forEach(x => {
+        console.log('----------------------------------------------------------')
+        console.log(x.replace(/.*\\/g, ''))
+        console.log('----------------------------------------------------------')
+        // generarObj(x)
+        console.log(generarObj(x))
+    })
+})
