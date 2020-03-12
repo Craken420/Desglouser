@@ -2,14 +2,14 @@ const { generarObj } = require('./Utilerias/OperadorObjetos/desglozar')
 const { leerCarpetaFiltrada } = require('./Utilerias/OperadoresArchivos/readDirOnlyFile')
 
 const carpeta = 'Testing\\'
-const file = 'Testing\\FormaValor.vis'
+const file = 'Testing\\DM0269OrdenadorRutaDeRepartoFrm.frm'
 
 /* Usage */ 
 
-// Path File
-generarObj(file)
+// Operar Archivo
+console.log( generarObj(file) )
 
-// Path dir
+//Param1: Carpeta a operar; Param2: Extensiones permitidas
 leerCarpetaFiltrada(carpeta, ['.frm', '.tbl', '.vis', '.dlg', '.rep'])
 .then(archivos => {
     
