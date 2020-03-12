@@ -3,7 +3,7 @@ Herramienta para desglozar objetos
 
 0.- Clona el repositorio "Desglouser"
 
-    git clone
+    git clone https://github.com/Craken420/Desglouser.git
 
 1.- Dentro de la carpeta "Desgloser", clona el repositorio de "Utilerias":
 
