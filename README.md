@@ -1,7 +1,11 @@
 # Desglouser
 Herramienta para desglozar objetos
 
-1.-Agrega las utilerias para su utilización:
+0.- Clona el repositorio "Desglouser"
+
+    git clone
+
+1.- Dentro de la carpeta "Desgloser", clona el repositorio de "Utilerias":
 
     git clone https://github.com/Craken420/Utilerias.git
     
@@ -9,13 +13,12 @@ Herramienta para desglozar objetos
     
     git checkout General
 
-3.- Abrir en consola al desglosador
+3.- Abrir en consola al "Desglouser.js" y colocalo en la rama de "develop"
 
-4.- Colocarlo en la rama de "develop"
-
-   git checkout develop
+    git checkout develop
    
 5.- Ejecutar la herramineta
-   node desgloser
+
+    node desglouser
 
   
