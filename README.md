@@ -13,7 +13,7 @@ Herramienta para desglozar objetos
     
     git checkout General
 
-3.- Abrir en consola al "Desglouser.js" y colocalo en la rama de "develop"
+3.- Abrir en consola al "Desglouser.js" y colocalo en la rama de "master"
 
     git checkout develop
    
