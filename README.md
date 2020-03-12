@@ -15,7 +15,7 @@ Herramienta para desglozar objetos
 
 3.- Abrir en consola al "Desglouser.js" y colocalo en la rama de "master"
 
-    git checkout develop
+    git checkout master
    
 5.- Ejecutar la herramineta
 
