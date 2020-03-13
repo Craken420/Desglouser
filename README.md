@@ -13,9 +13,17 @@ Herramienta para desglozar objetos
     
     git checkout General
 
-3.- Abrir en consola al "Desglouser.js" y colocalo en la rama de "master"
+3.- Instala las dependencias
+
+    npm i
+    
+4.- Abrir en consola al "Desglouser.js" y colocalo en la rama de "master"
 
     git checkout master
+   
+3.- Instala las dependencias
+
+    npm i
    
 5.- Ejecutar la herramineta
 
